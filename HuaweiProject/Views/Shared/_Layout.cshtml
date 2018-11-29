@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Huawei Turkey</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Huawei Turkey", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+                <div class="pull-right" style="margin-top:14px;">
+                    @if (Session["name"] != null)
+                    {
+                        <span style="color:dimgrey; font-size:17px;">
+                            Welcome                 @Session["name"]!
+                        </span>
+                        @Html.ActionLink(" LogOut", "LogOut", "Account", null, new { @class = "glyphicon glyphicon-log-in" });
+
+                        //<a href="Account/LogOut">Log Out!</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(" LogIn", "LogOut", "Account", null, new { @class = "glyphicon glyphicon-log-in" });
+                        //<a href="Account/LogOut">Log In!</a>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 ">
+            @RenderBody()
+        </div>
+    </div>
+    <hr />
+    <div class="col-sm-2 col-sm-offset-5 navbar-fixed-bottom">
+        <footer>
+            <p>&nbsp;&nbsp; &copy; @DateTime.Now.Year - by Hamza TEKCAN</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/gridmvc.js"></script>
+    <script src="~/Scripts/gridmvc.lang.ru.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+</body>
+</html>

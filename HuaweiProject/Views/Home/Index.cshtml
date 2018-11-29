@@ -1,0 +1,118 @@
+﻿@model IEnumerable<HuaweiProject.Models.ToDoList>
+@using GridMvc.Html
+@{ 
+  
+}
+@{
+    ViewBag.Title = "To-Do Lists";
+}
+<br />
+<p>
+    @Html.ActionLink("Create New To-Do List", "AddToDoList", null, new { @class = "btn btn-primary" })
+</p>
+<br />
+<div class="code-cut">
+    @if (Session["name"] != null)
+    {
+        @Html.Grid(Model).Columns(Columns =>
+   {
+       // Columns.Add(c => c.ID).Titled("ID").Filterable(true);
+
+       Columns.Add(c => c.Name).Titled("Name").Filterable(true);
+       Columns.Add(c => c.Deadline).Titled("Deadline").Filterable(true);
+       Columns.Add(o => o.Status)
+       .Titled("Status")
+       .Filterable(true)
+       .RenderValueAs(o => o.Status == true ? "Completed!" : "Not completed!");
+       Columns.Add(c => c.Description).Titled("Description").Filterable(true);
+
+       Columns.Add()
+      .Encoded(false)
+      .Sanitized(false)
+       .SetWidth(30)
+      .RenderValueAs(o => Html.ActionLink(" ", "Preview", new { id = o.ID }, new { @class = "glyphicon glyphicon-eye-open color" }));
+
+       Columns.Add()
+      .Encoded(false)
+      .Sanitized(false)
+           .SetWidth(30)
+      .RenderValueAs(o => Html.ActionLink(" ", "Edit", new { id = o.ID }, new { @class = "glyphicon glyphicon-pencil color" }));
+
+
+       Columns.Add()
+.Encoded(false)
+.Sanitized(false)
+     .SetWidth(30)
+.RenderValueAs(o => Html.ActionLink(" ", "AddToDo", new { id = o.ID }, new { @class = "glyphicon glyphicon-plus color" }));
+
+
+       Columns.Add()
+       .Encoded(false)
+       .Sanitized(false)
+        .SetWidth(30)
+       .RenderValueAs(o => Html.ActionLink(" ", "TodoList", new { id = o.ID }, new { @class = "glyphicon glyphicon-list color color" }));
+
+       Columns.Add()
+       .Encoded(false)
+       .Sanitized(false)
+       .SetWidth(30)
+       .RenderValueAs(o => Html.ActionLink(" ", "Delete", new { id = o.ID }, new { @class = "glyphicon glyphicon-trash color" }));
+   }).WithPaging(10).Sortable(true)
+    }
+    else
+    {
+
+
+        @Html.Grid(Model).Columns(Columns =>
+ {
+     // Columns.Add(c => c.ID).Titled("ID").Filterable(true);
+
+     Columns.Add(c => c.Name).Titled("Name").Filterable(true);
+     Columns.Add(c => c.Deadline).Titled("Deadline").Filterable(true);
+     Columns.Add(o => o.Status)
+     .Titled("Status")
+     .Filterable(true)
+     .RenderValueAs(o => o.Status == true ? "Did complete?" : "Not Completed!");
+     Columns.Add(c => c.Description).Titled("Description").Filterable(true);
+
+     Columns.Add()
+    .Encoded(false)
+    .Sanitized(false)
+     .SetWidth(30)
+    .RenderValueAs(o => Html.ActionLink(" ", "Preview", new { id = o.ID }, new { @class = "glyphicon glyphicon-eye-open color" }));
+
+     Columns.Add()
+    .Encoded(false)
+    .Sanitized(false)
+         .SetWidth(30)
+    .RenderValueAs(o => Html.ActionLink(" ", "Edit", new { id = o.ID }, new { @class = "glyphicon glyphicon-pencil color" }));
+
+
+     Columns.Add()
+.Encoded(false)
+.Sanitized(false)
+   .SetWidth(30)
+.RenderValueAs(o => Html.ActionLink(" ", "AddItem", new { id = o.ID }, new { @class = "glyphicon glyphicon-plus color" }));
+
+
+     Columns.Add()
+     .Encoded(false)
+     .Sanitized(false)
+      .SetWidth(30)
+     .RenderValueAs(o => Html.ActionLink(" ", "Preview", new { id = o.ID }, new { @class = "glyphicon glyphicon-list color color" }));
+
+     Columns.Add()
+     .Encoded(false)
+     .Sanitized(false)
+     .SetWidth(30)
+     .RenderValueAs(o => Html.ActionLink(" ", "Delete", new { id = o.ID }, new { @class = "glyphicon glyphicon-trash color" }));
+ }).WithPaging(10).Sortable(true)
+
+
+
+
+        //@Html.ActionLink("Please Log In", "LogOut", "Account",null, new { @class = "btn btn-succsess" });
+    }
+</div>
+
+
